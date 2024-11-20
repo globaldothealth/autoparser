@@ -10,7 +10,8 @@ using a schema file, ready to use with the data transformation tool [adtl](https
 ## Framework
 
 ```{figure} images/flowchart.png
-Flowchart showing the inputs, outputs and functions of AutoParser.
+Flowchart showing the inputs (bright blue), outputs (green blocks) and functions
+(dashed diamonds) of AutoParser.
 ```
 
 ## Documentation
@@ -23,5 +24,4 @@ self
 getting_started/index
 usage/data_dict
 usage/parser_generation
-../example
 ```

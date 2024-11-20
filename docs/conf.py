@@ -4,13 +4,13 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-project = "InsightBoard"
+project = "AutoParser"
 copyright = "2024, globaldothealth"
 author = "globaldothealth"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 extensions = [
-    "sphinx.ext.autodoc",
+    "sphinx-autodoc2",
     "sphinx.ext.napoleon",
     "sphinx.ext.coverage",
     "sphinx.ext.graphviz",

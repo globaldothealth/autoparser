@@ -52,7 +52,8 @@ to generate a data parser.
 
 ## API
 
-```{autofunction} autoparser.create_dictionary
+```{autodoc2-object} autoparser.create_dict
+reder_plugin = "myst"
 ```
 
 

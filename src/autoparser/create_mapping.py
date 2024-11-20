@@ -6,13 +6,18 @@ import argparse
 from pathlib import Path
 import pandas as pd
 from openai import OpenAI
+import google.generativeai as gemini
 import warnings
 import numpy as np
 
 from .openai_calls import _map_fields as _map_fields_openai
 from .openai_calls import _map_values as _map_values_openai
+from .gemini_calls import _map_fields as _map_fields_gemini
+from .gemini_calls import _map_values as _map_values_gemini
 from .util import read_json, read_data, load_data_dict
 from .util import DEFAULT_CONFIG
+
+from typing import Literal
 
 
 class Mapper:
@@ -34,7 +39,7 @@ class Mapper:
     api_key
         The API key to use for the LLM
     llm
-        The LLM to use, currently only 'openai' is supported
+        The LLM to use, currently only 'openai' and 'gemini' are supported
     config
         The path to the configuration file to use if not using the default configuration
     """
@@ -45,19 +50,23 @@ class Mapper:
         data_dictionary: str | pd.DataFrame,
         language: str,
         api_key: str | None = None,
-        llm: str | None = "openai",
+        llm: Literal["openai", "gemini"] | None = "openai",
         config: Path | None = None,
     ):
         self.schema = read_json(schema)
         self.schema_properties = self.schema["properties"]
         self.language = language
         self.api_key = api_key
-        if llm is not None and llm == "openai":
+        if llm is None:
+            self.client = None
+        elif llm == "openai":
             self.client = OpenAI(api_key=self.api_key)
             self.map_fields = _map_fields_openai
             self.map_values = _map_values_openai
-        elif llm is None:
-            self.client = None
+        elif llm == "gemini":
+            self.client = gemini.configure(api_key=self.api_key)
+            self.map_fields = _map_fields_gemini
+            self.map_values = _map_values_gemini
         else:
             raise ValueError(f"Unsupported LLM: {llm}")
 

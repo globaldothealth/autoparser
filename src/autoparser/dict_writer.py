@@ -6,9 +6,11 @@ import argparse
 from pathlib import Path
 import pandas as pd
 from openai import OpenAI
+import google.generativeai as gemini
 import numpy as np
 
 from .openai_calls import _get_definitions as _get_definitions_openai
+from .gemini_calls import _get_definitions as _get_definitions_gemini
 from .util import read_data, load_data_dict
 from .util import DEFAULT_CONFIG
 
@@ -50,13 +52,17 @@ class DictWriter:
         key
             API key
         name
-            Name of the LLM to use (currently only OpenAI is supported)
+            Name of the LLM to use (currently only OpenAI and Gemini are supported)
         """
         self.key = key
         if name == "openai":
             self.client = OpenAI(api_key=key)
 
             self._get_descriptions = _get_definitions_openai
+
+        elif name == "gemini":
+            self.client = gemini.configure(api_key=key)
+            self._get_descriptions = _get_definitions_gemini
 
         else:
             raise ValueError(f"Unsupported LLM: {name}")

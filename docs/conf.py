@@ -17,6 +17,7 @@ extensions = [
     "myst_parser",
     "sphinx_book_theme",
     "sphinxcontrib.mermaid",
+    "myst_nb",
 ]
 templates_path = [
     "_templates",

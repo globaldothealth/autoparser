@@ -52,8 +52,9 @@ to generate a data parser.
 
 ## API
 
-```{autodoc2-object} autoparser.create_dict
-reder_plugin = "myst"
+```{eval-rst}
+.. autofunction:: autoparser.generate_dict
+    :noindex:
 ```
 
 

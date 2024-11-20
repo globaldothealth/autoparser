@@ -1,7 +1,8 @@
 # autoparser
 
 [![](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![tests](https://github.com/globaldothealth/autoparser/actions/workflows/tests.yml/badge.svg)](https://github.com/globaldothealth/autoparser/actions/workflows/tests.yml)
+[![Test Status](https://github.com/globaldothealth/autoparser/actions/workflows/tests.yml/badge.svg)](https://github.com/globaldothealth/autoparser/actions/workflows/tests.yml)
+[![Documentation Status](https://readthedocs.org/projects/insightboard/badge/?version=latest)](https://insightboard.readthedocs.io/en/latest/?badge=latest)
 <!-- [![codecov](https://codecov.io/gh/globaldothealth/autoparser/graph/badge.svg?token=AINU8PNJE3)](https://codecov.io/gh/globaldothealth/autoparser) -->
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -9,6 +10,8 @@ autoparser helps in the generation of ADTL parsers as
 TOML files, which can then be processed by
 [adtl](https://github.com/globaldothealth/adtl) to transform files from the
 source schema to a specified schema.
+
+Documentation: [ReadTheDocs](https://autoparser.readthedocs.io/en/latest)
 
 Contains functionality to:
 1. Create a basic data dictionary from a raw data file (`create-dict`)
@@ -93,7 +96,7 @@ defaultDateFormat = "%d/%m/%Y"
 which should automatically convert the dates for you.
 
 2. ADTL can't find my schema (error: No such file or directory ..../x.schema.json)
-autoparser puts the path to the schema at the top of the TOML file, relative to the
+AutoParser puts the path to the schema at the top of the TOML file, relative to the
 *current location of the parser* (i.e, where you ran the autoparser command from).
 If you have since moved the parser file, you will need to update the schema path at the
 top of the TOML parser.

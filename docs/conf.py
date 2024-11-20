@@ -4,7 +4,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-project = "InsightBoard"
+project = "AutoParser"
 copyright = "2024, globaldothealth"
 author = "globaldothealth"
 # -- General configuration ---------------------------------------------------
@@ -14,9 +14,9 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.coverage",
     "sphinx.ext.graphviz",
-    "myst_parser",
     "sphinx_book_theme",
     "sphinxcontrib.mermaid",
+    "myst_nb",
 ]
 templates_path = [
     "_templates",

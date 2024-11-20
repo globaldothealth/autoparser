@@ -14,7 +14,6 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.coverage",
     "sphinx.ext.graphviz",
-    "myst_parser",
     "sphinx_book_theme",
     "sphinxcontrib.mermaid",
     "myst_nb",

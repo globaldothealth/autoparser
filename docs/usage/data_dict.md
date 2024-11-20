@@ -53,10 +53,10 @@ to generate a data parser.
 ## API
 
 ```{eval-rst}
-.. autofunction:: autoparser.dict_writer.create_dict
+.. autofunction:: autoparser.create_dict
     :noindex:
 
-.. autofunction:: autoparser.dict_writer.generate_descriptions
+.. autofunction:: autoparser.generate_descriptions
     :noindex:
 ```
 

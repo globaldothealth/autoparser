@@ -43,9 +43,9 @@ schema, ready for use transforming data.
 ## API
 
 ```{eval-rst}
-.. autofunction:: autoparser.create_mapping.create_mapping
+.. autofunction:: autoparser.create_mapping
     :noindex:
 
-.. autofunction:: autoparser.make_toml.create_parser
+.. autofunction:: autoparser.create_parser
     :noindex:
 ```

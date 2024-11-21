@@ -7,13 +7,13 @@ It should contain, at minimum, a list of field/column names, and some kind of de
 of what data each field holds. This often takes the form of a textual description, plus
 a note of the data type (text, decimals, date, boolean...) and/or a set of expected values.
 
-A data dictionary is required by AutoParser for (parser generation)[parser_generation].
+A data dictionary is required by AutoParser for [parser generation](parser_generation).
 This is to avoid having to send potentially sensitive or confidential data to an external
 body (in this case an externally hosted LLM hosted); instead a *decription* of what the
 data looks like from the dictionary can be sent to the LLM, which allows for mapping to
 occur without risking the unintentional release of data.
 
-Many data capture services such as (REDCaP)[https://projectredcap.org/] will generate
+Many data capture services such as [REDCaP](https://projectredcap.org/) will generate
 a data dictionary automatically when surveys are set up. However, where data is being
 captured either rapidly, or by individuals/small teams, a formal data dictionary may not
 have been created for a corresponding dataset. For this scenario, AutoParser provides 

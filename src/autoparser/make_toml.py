@@ -289,10 +289,11 @@ def create_parser(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Make TOML from intermediate CSV file created by create_mapping.py"
+        description="Make TOML from intermediate CSV file created by create_mapping.py",
+        prog="autoparser create-parser",
     )
     parser.add_argument("mappings", help="Mapping file to create TOML from", type=str)
-    parser.add_argument("schema", help="Path where schemas are located")
+    parser.add_argument("schema_path", help="Path where schemas are located")
     parser.add_argument(
         "-n",
         "--name",

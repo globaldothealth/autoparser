@@ -24,7 +24,7 @@ usage/index
 
 ## Example pages
 
-Example notebooks demonstrating usage of this tool
+Examples demonstrating usage of this tool
 
 ```{toctree}
 ---
@@ -32,4 +32,5 @@ maxdepth: 2
 caption: Examples
 ---
 examples/example
+examples/cli_example
 ```

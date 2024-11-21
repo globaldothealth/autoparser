@@ -110,7 +110,7 @@ class Mapper:
     @property
     def common_values(self) -> pd.Series:
         """
-        Reuturns the commonly repeated values in the source data
+        Returns the commonly repeated values in the source data
         Usually this indicates that the source field is an enum or boolean
         """
         try:

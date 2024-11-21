@@ -16,4 +16,25 @@ uv sync
 . .venv/bin/activate
 ```
 
-To view and use the CLI, you can type `autoparser` into the command line to view the options available.
+To view and use the CLI, you can type `autoparser` into the command line to view the
+options available.
+
+## Other requirements
+
+AutoParser relies on LLMs to automatically map raw data fields to a target schema.
+In order to use this tool, you will need an API key for either [OpenAI](https://platform.openai.com/docs/quickstart/create-and-export-an-api-key)
+or Google's [Gemini](https://aistudio.google.com/apikey) [Dev note: work in progress!].
+AutoParser will use either OpenAI's `gpt-4-mini`, or Google's `gemini-1.5-flash`.
+
+The LLM should *never* see your raw data; only the data dictionary which contains 
+column headers, and text descriptions of what each field shoud contain.
+
+### Supported file formats
+Autoparser supports CSV and XLSX formats for raw data and data dictionary files, and either
+JSON or TOML for the target schema.
+
+## Quickstart
+
+See the example notebook [here](../examples/example.ipynb) for a basic walk through the
+functionality of AutoParser.
+

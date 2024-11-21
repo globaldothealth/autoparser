@@ -4,7 +4,6 @@ The following functions can be used to create the intermediate mapping CSV requi
 
 ```{eval-rst}
 .. autofunction:: autoparser.create_mapping
-    :noindex:
 ```
 
 ## Class definitions

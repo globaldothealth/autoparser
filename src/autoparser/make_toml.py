@@ -111,7 +111,8 @@ class ParserGenerator:
             )
 
     @property
-    def parsed_choices(self):
+    def parsed_choices(self) -> pd.Series:
+        """Returns the mapped values for each taget field"""
         try:
             return self._parsed_choices
         except AttributeError:
@@ -124,7 +125,8 @@ class ParserGenerator:
             return self._parsed_choices
 
     @property
-    def references_definitions(self):
+    def references_definitions(self) -> tuple[dict[str, str], dict[str, dict]]:
+        """Finds and returns the references and definitions for the mappings"""
         try:
             return self._references_definitions
         except AttributeError:
@@ -158,11 +160,11 @@ class ParserGenerator:
             return self._references_definitions
 
     def schema_fields(self, table: str):
-        "Returns all the fields for `table` and their properties"
+        """Returns all the fields for `table` and their properties"""
         return self.schemas[table]["properties"]
 
-    def single_field_mapping(self, match: pd.core.frame.pandas) -> dict[str, Any]:
-        "Make a single field mapping from a single row of the mappings dataframe"
+    def single_field_mapping(self, match: pd.DataFrame) -> dict[str, Any]:
+        """Make a single field mapping from a single row of the mappings dataframe"""
 
         choices = self.parsed_choices[match.target_field]
 
@@ -178,7 +180,7 @@ class ParserGenerator:
         return out
 
     def make_toml_table(self, table: str) -> dict[str, Any]:
-        "Make single TOML table from mappings"
+        """Make single TOML table from mappings"""
 
         outmap = {}
 
@@ -289,10 +291,11 @@ def create_parser(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Make TOML from intermediate CSV file created by create_mapping.py"
+        description="Make TOML from intermediate CSV file created by create_mapping.py",
+        prog="autoparser create-parser",
     )
     parser.add_argument("mappings", help="Mapping file to create TOML from", type=str)
-    parser.add_argument("schema", help="Path where schemas are located")
+    parser.add_argument("schema_path", help="Path where schemas are located")
     parser.add_argument(
         "-n",
         "--name",

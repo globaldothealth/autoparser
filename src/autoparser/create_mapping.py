@@ -67,6 +67,7 @@ class Mapper:
 
     @property
     def target_fields(self) -> list[str]:
+        """Returns a list of fields in the target schema"""
         try:
             return self._target_fields
         except AttributeError:
@@ -75,6 +76,7 @@ class Mapper:
 
     @property
     def target_types(self) -> dict[str, list[str]]:
+        """Returns the field types of the target schema"""
         try:
             return self._target_types
         except AttributeError:
@@ -86,6 +88,7 @@ class Mapper:
 
     @property
     def target_values(self) -> pd.Series:
+        """Returns the enum values or boolean options for the target schema"""
         try:
             return self._target_values
         except AttributeError:
@@ -106,6 +109,10 @@ class Mapper:
 
     @property
     def common_values(self) -> pd.Series:
+        """
+        Returns the commonly repeated values in the source data
+        Usually this indicates that the source field is an enum or boolean
+        """
         try:
             return self._common_values
         except AttributeError:

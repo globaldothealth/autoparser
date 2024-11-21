@@ -2,10 +2,7 @@
 AutoParser is a tool for semi-automated data parser creation. The package allows you
 to generate a new data parser for converting your source data into a new format specified
 using a schema file, ready to use with the data transformation tool [adtl](https://adtl.readthedocs.io/en/latest/index.html).
-
-## Key Features
-- Data Dictionary Creation: Automatically create a basic data dictionary framework
-- Parser Generation: Generate data parsers to match a given schema
+Both programmatic and CLI usage are provided for. 
 
 ## Framework
 
@@ -15,13 +12,39 @@ Flowchart showing the inputs (bright blue), outputs (green blocks) and functions
 ```
 
 ## Documentation
+
+how to get started with AutoParser, and describes the API
+
 ```{toctree}
 ---
 maxdepth: 2
-caption: Contents:
+caption: Documentation
 ---
-self
 getting_started/index
-usage/data_dict
-usage/parser_generation
+usage/index
+```
+
+## Example pages
+
+Examples demonstrating usage of this tool
+
+```{toctree}
+---
+maxdepth: 2
+caption: Examples
+---
+examples/example
+examples/cli_example
+```
+
+## API reference
+
+Documents the full API
+
+```{toctree}
+---
+maxdepth: 2
+caption: API
+---
+api/index
 ```

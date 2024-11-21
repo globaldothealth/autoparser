@@ -1,13 +1,13 @@
 # Write a Data Parser
 
-AutoParser assumes the use of Global.Health's (adtl)[https://github.com/globaldothealth/adtl]
+AutoParser assumes the use of Global.Health's [adtl](https://github.com/globaldothealth/adtl)
 package to transform your source data into a standardised format. To do this, adtl requires a
-(TOML)[https://toml.io/en/] specification file which describes how raw data should be
+[TOML](https://toml.io/en/) specification file which describes how raw data should be
 converted into the new format, on a field-by-field basis. Every unique data file format
 (i.e. unique sets of fields and data types) should have a corresponding parser file.
 
 AutoParser exists to semi-automate the process of writing new parser files. This requires
-a data dictionary (which can be created if it does not already exist, see [data_dict]),
+a data dictionary (which can be created if it does not already exist, see '[Create Data dictionary](data_dict)'),
 and the JSON schema of the target format.
 
 Parser generation is a 2-step process. 

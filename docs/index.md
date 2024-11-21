@@ -24,4 +24,5 @@ self
 getting_started/index
 usage/data_dict
 usage/parser_generation
+examples/example
 ```

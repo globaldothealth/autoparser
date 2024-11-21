@@ -91,7 +91,7 @@ def load_data_dict(
 
 class SingleField(BaseModel):
     field_name: str
-    translation: str
+    translation: str | None
 
 
 class ColumnDescriptionRequest(BaseModel):

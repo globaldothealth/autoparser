@@ -1,15 +1,15 @@
 "Contains all functions that call Google's Gemini API."
 import google.generativeai as gemini
 from .util import ColumnDescriptionRequest, MappingRequest, ValuesRequest
+import json
 
 
 def _get_definitions(
-    headers: list[str], language: str, client: gemini
+    headers: list[str], language: str, model: gemini.GenerativeModel
 ) -> dict[str, str]:
     """
     Get the definitions of the columns in the dataset.
     """
-    model = client.GenerativeModel("gemini-1.5-flash")
     result = model.generate_content(
         [
             (
@@ -21,22 +21,24 @@ def _get_definitions(
             ),
             f"{headers}",
         ],
-        generation_config=client.GenerationConfig(
+        generation_config=gemini.GenerationConfig(
             response_mime_type="application/json",
             response_schema=ColumnDescriptionRequest,
         ),
     )
-    descriptions = result.field_descriptions
+    descriptions = ColumnDescriptionRequest.model_validate(
+        json.loads(result.text)
+    ).field_descriptions
     return descriptions
 
 
 def _map_fields(
-    source_fields: list[str], target_fields: list[str], client: gemini
+    source_fields: list[str], target_fields: list[str], model: gemini.GenerativeModel
 ) -> MappingRequest:
     """
     Calls the Gemini API to generate a draft mapping between two datasets.
     """
-    model = client.GenerativeModel("gemini-1.5-flash")
+    # model = client.GenerativeModel("gemini-1.5-flash")
     result = model.generate_content(
         [
             (
@@ -53,21 +55,23 @@ def _map_fields(
                 f"These are the source descriptions: {source_fields}"
             ),
         ],
-        generation_config=client.GenerationConfig(
+        generation_config=gemini.GenerationConfig(
             response_mime_type="application/json",
             response_schema=MappingRequest,
         ),
     )
-    return result
+    return MappingRequest.model_validate(json.loads(result.text))
 
 
 def _map_values(
-    values: list[tuple[set[str], set[str], list[str]]], language: str, client: gemini
+    values: list[tuple[set[str], set[str], list[str]]],
+    language: str,
+    model: gemini.GenerativeModel,
 ) -> ValuesRequest:
     """
     Calls the Gemini API to generate a set of value mappings for the fields.
     """
-    model = client.GenerativeModel("gemini-1.5-flash")
+    # model = client.GenerativeModel("gemini-1.5-flash")
     result = model.generate_content(
         [
             (
@@ -90,9 +94,9 @@ def _map_values(
             ),
             f"These are the field, source, target value sets: {values}",
         ],
-        generation_config=client.GenerationConfig(
+        generation_config=gemini.GenerationConfig(
             response_mime_type="application/json",
             response_schema=ValuesRequest,
         ),
     )
-    return result
+    return ValuesRequest.model_validate(json.loads(result.text))

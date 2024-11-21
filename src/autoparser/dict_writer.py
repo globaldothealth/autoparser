@@ -61,7 +61,8 @@ class DictWriter:
             self._get_descriptions = _get_definitions_openai
 
         elif name == "gemini":
-            self.client = gemini.configure(api_key=key)
+            gemini.configure(api_key=key)
+            self.client = gemini.GenerativeModel("gemini-1.5-flash")
             self._get_descriptions = _get_definitions_gemini
 
         else:

@@ -64,7 +64,8 @@ class Mapper:
             self.map_fields = _map_fields_openai
             self.map_values = _map_values_openai
         elif llm == "gemini":
-            self.client = gemini.configure(api_key=self.api_key)
+            gemini.configure(api_key=self.api_key)
+            self.client = gemini.GenerativeModel("gemini-1.5-flash")
             self.map_fields = _map_fields_gemini
             self.map_values = _map_values_gemini
         else:

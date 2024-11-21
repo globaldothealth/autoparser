@@ -12,12 +12,14 @@ Flowchart showing the inputs (bright blue), outputs (green blocks) and functions
 ```
 
 ## Documentation
+
+how to get started with AutoParser, and describes the API
+
 ```{toctree}
 ---
 maxdepth: 2
-caption: Contents:
+caption: Documentation
 ---
-self
 getting_started/index
 usage/index
 ```
@@ -33,4 +35,16 @@ caption: Examples
 ---
 examples/example
 examples/cli_example
+```
+
+## API reference
+
+Documents the full API
+
+```{toctree}
+---
+maxdepth: 2
+caption: API
+---
+api/index
 ```

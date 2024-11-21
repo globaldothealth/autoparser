@@ -22,7 +22,6 @@ caption: Contents:
 ---
 self
 getting_started/index
-usage/data_dict
-usage/parser_generation
+usage/index
 examples/example
 ```

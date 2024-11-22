@@ -168,6 +168,41 @@ def test_common_values():
     pd.testing.assert_series_equal(mapper.common_values, common_vals, check_names=False)
 
 
+def test_missing_common_values():
+    df = pd.DataFrame(
+        {
+            "source_field": ["test"],
+            "source_description": ["test"],
+            "source_type": ["test"],
+        }
+    )
+
+    with pytest.raises(ValueError, match="No common values or choices"):
+        MapperTest(
+            Path("tests/schemas/animals.schema.json"),
+            df,
+            "fr",
+        ).common_values
+
+
+def test_choices_present():
+    df = pd.DataFrame(
+        {
+            "source_field": ["test"],
+            "source_description": ["test"],
+            "source_type": ["test"],
+            "choices": ["test"],
+        }
+    )
+
+    with pytest.raises(NotImplementedError, match="choices column not yet supported"):
+        MapperTest(
+            Path("tests/schemas/animals.schema.json"),
+            df,
+            "fr",
+        ).common_values
+
+
 def test_mapped_fields_error():
     with pytest.raises(AttributeError):
         ANIMAL_MAPPER.mapped_fields

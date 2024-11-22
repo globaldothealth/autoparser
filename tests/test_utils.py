@@ -1,19 +1,15 @@
-# read_data
-# parse_choices
-# load_data_dict
-
 import pytest
 from pathlib import Path
 import numpy.testing as npt
 import pandas as pd
 
-from autoparser.util import read_data, parse_choices, load_data_dict
+from autoparser.util import read_config_schema, parse_choices, load_data_dict
 
-CONFIG = read_data(Path("tests/test_config.toml"))
+CONFIG = read_config_schema(Path("tests/test_config.toml"))
 
 
-def test_read_data():
-    data = read_data(Path("tests/test_config.toml"))
+def test_read_config_schema():
+    data = read_config_schema(Path("tests/test_config.toml"))
     assert isinstance(data, dict)
     npt.assert_array_equal(
         [
@@ -29,7 +25,7 @@ def test_read_data():
         list(data.keys()),
     )
 
-    data = read_data(Path("tests/schemas/animals.schema.json"))
+    data = read_config_schema(Path("tests/schemas/animals.schema.json"))
     assert isinstance(data, dict)
     npt.assert_array_equal(
         ["$schema", "$id", "title", "description", "required", "properties"],
@@ -37,7 +33,7 @@ def test_read_data():
     )
 
     with pytest.raises(ValueError, match="Unsupported file format: .csv"):
-        read_data(Path("tests/sources/animals_dd_described.csv"))
+        read_config_schema(Path("tests/sources/animals_dd_described.csv"))
 
 
 @pytest.mark.parametrize(

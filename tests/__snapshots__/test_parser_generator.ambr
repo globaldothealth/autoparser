@@ -71,6 +71,78 @@
     }),
   })
 # ---
+# name: test_create_parser_ap_access
+  dict({
+    'age_months': dict({
+      'description': 'Age in Months',
+      'field': 'AgeMois         ',
+    }),
+    'age_years': dict({
+      'description': 'Age in Years',
+      'field': 'AgeAns',
+    }),
+    'case_status': dict({
+      'caseInsensitive': True,
+      'description': 'Case Status',
+      'field': 'StatusCas',
+      'values': dict({
+        'décédé': 'dead',
+        'vivant': 'alive',
+      }),
+    }),
+    'chipped': dict({
+      'description': 'Microchipped',
+      'field': 'Micropucé',
+      'ref': 'Y/N/NK',
+    }),
+    'classification': dict({
+      'caseInsensitive': True,
+      'description': 'Classification',
+      'field': 'Classicfication ',
+      'values': dict({
+        'amphibie': 'amphibian',
+        'autre': '',
+        'fish': 'fish',
+        'mammifère': 'mammal',
+        'oiseau': 'bird',
+        'poisson': 'fish',
+        'rept': 'reptile',
+      }),
+    }),
+    'country_iso3': '',
+    'identity': dict({
+      'description': 'Identity',
+      'field': 'Identité',
+    }),
+    'loc_admin_1': dict({
+      'description': 'Province',
+      'field': 'Province',
+    }),
+    'name': dict({
+      'description': 'Full Name',
+      'field': 'Nom complet ',
+    }),
+    'notification_date': dict({
+      'description': 'Notification Date',
+      'field': 'DateNotification',
+    }),
+    'pet': dict({
+      'description': 'Pet Animal',
+      'field': 'AnimalDeCompagnie',
+      'ref': 'Y/N/NK',
+    }),
+    'sex': dict({
+      'caseInsensitive': True,
+      'description': 'Gender',
+      'field': 'Sexe',
+      'values': dict({
+        'f': 'female',
+        'inconnu': '',
+        'm': 'male',
+      }),
+    }),
+  })
+# ---
 # name: test_schema_fields
   dict({
     'age_months': dict({

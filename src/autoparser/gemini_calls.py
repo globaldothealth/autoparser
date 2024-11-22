@@ -18,6 +18,7 @@ def _get_definitions(
                 f"{language}, some containing shortened words or abbreviations. "
                 "Translate them to english. "
                 "Return a list of (original header, translation) pairs, using the given structure."  # noqa
+                "Preserve special characters such as accented letters and hyphens."
             ),
             f"{headers}",
         ],
@@ -38,7 +39,6 @@ def _map_fields(
     """
     Calls the Gemini API to generate a draft mapping between two datasets.
     """
-    # model = client.GenerativeModel("gemini-1.5-flash")
     result = model.generate_content(
         [
             (
@@ -48,6 +48,7 @@ def _map_fields(
                 "of source data. "
                 "Match each target header to the best matching source description, "
                 "but match a header to None if a good match does not exist. "
+                "Preserve special characters such as accented letters and hyphens."
                 "Return the matched target headers and source descriptions using the provided structure."  # noqa
             ),
             (
@@ -71,7 +72,6 @@ def _map_values(
     """
     Calls the Gemini API to generate a set of value mappings for the fields.
     """
-    # model = client.GenerativeModel("gemini-1.5-flash")
     result = model.generate_content(
         [
             (
@@ -91,6 +91,7 @@ def _map_values(
                 "[{'field_name_1': {'source_value_a': 'target_value_a', "
                 "'source_value_b': 'target_value_b'}, 'field_name_2':{...}]"
                 "using the provided structure."
+                "Preserve special characters such as accented letters and hyphens."
             ),
             f"These are the field, source, target value sets: {values}",
         ],

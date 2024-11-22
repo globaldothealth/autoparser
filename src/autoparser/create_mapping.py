@@ -14,7 +14,7 @@ from .openai_calls import _map_fields as _map_fields_openai
 from .openai_calls import _map_values as _map_values_openai
 from .gemini_calls import _map_fields as _map_fields_gemini
 from .gemini_calls import _map_values as _map_values_gemini
-from .util import read_json, read_data, load_data_dict
+from .util import read_json, read_config_schema, load_data_dict
 from .util import DEFAULT_CONFIG
 
 from typing import Literal
@@ -59,11 +59,11 @@ class Mapper:
         self.api_key = api_key
         if llm is None:
             self.client = None
-        elif llm == "openai":
+        elif llm == "openai":  # pragma: no cover
             self.client = OpenAI(api_key=self.api_key)
             self.map_fields = _map_fields_openai
             self.map_values = _map_values_openai
-        elif llm == "gemini":
+        elif llm == "gemini":  # pragma: no cover
             gemini.configure(api_key=self.api_key)
             self.client = gemini.GenerativeModel("gemini-1.5-flash")
             self.map_fields = _map_fields_gemini
@@ -71,7 +71,9 @@ class Mapper:
         else:
             raise ValueError(f"Unsupported LLM: {llm}")
 
-        self.config = read_data(config or Path(Path(__file__).parent, DEFAULT_CONFIG))
+        self.config = read_config_schema(
+            config or Path(Path(__file__).parent, DEFAULT_CONFIG)
+        )
 
         self.data_dictionary = load_data_dict(self.config, data_dictionary)
 

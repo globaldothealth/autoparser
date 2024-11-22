@@ -10,8 +10,7 @@ from typing import Any
 import pandas as pd
 
 from .toml_writer import dump
-from .util import parse_choices
-from .util import read_data
+from .util import parse_choices, read_config_schema, read_data
 from .util import DEFAULT_CONFIG
 
 
@@ -73,12 +72,7 @@ class ParserGenerator:
         config: Path | None = None,
         transformation_tool: str = "ADTL",
     ):
-        if isinstance(mappings, str):
-            mappings = Path(mappings)
-        if mappings.suffix == ".csv":
-            self.mappings = pd.read_csv(mappings)
-        else:
-            raise ValueError(f"Unsupported format (not CSV): {mappings}")
+        self.mappings = read_data(mappings, "A mapping file")
 
         self.schema_path = (
             schema_path if isinstance(schema_path, Path) else Path(schema_path)
@@ -86,11 +80,13 @@ class ParserGenerator:
         self.parser_name = parser_name
         self.parser_description = description or parser_name
 
-        self.config = read_data(config or Path(Path(__file__).parent, DEFAULT_CONFIG))
+        self.config = read_config_schema(
+            config or Path(Path(__file__).parent, DEFAULT_CONFIG)
+        )
         self.tables = self.config["schemas"].keys()
 
         self.schemas = {
-            t: read_data(Path(schema_path, self.config["schemas"][t]))
+            t: read_config_schema(Path(schema_path, self.config["schemas"][t]))
             for t in self.tables
         }
 
@@ -286,7 +282,7 @@ def create_parser(
         parser_name,
         description,
         Path(config),
-    ).create_parser()
+    ).create_parser(parser_name)
 
 
 def main():

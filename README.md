@@ -15,7 +15,7 @@ Documentation: [ReadTheDocs](https://autoparser.readthedocs.io/en/latest)
 
 Contains functionality to:
 1. Create a basic data dictionary from a raw data file (`create-dict`)
-2. Use an LLM (currently only ChatGPT via the OpenAI API) to add descriptions to the 
+2. Use an LLM (currently via either OpenAI or Google's Gemini) to add descriptions to the 
     data dictionary, to enable better parser auto-generation (`add-descriptions`)
 3. Create a mapping csv file linking source to target data fields and value mappings 
     using the LLM, which can be edited by a user (`create-mapping`)

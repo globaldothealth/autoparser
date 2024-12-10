@@ -1,10 +1,6 @@
 # autoparser
 
-[![](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![Test Status](https://github.com/globaldothealth/autoparser/actions/workflows/tests.yml/badge.svg)](https://github.com/globaldothealth/autoparser/actions/workflows/tests.yml)
-[![Documentation Status](https://readthedocs.org/projects/insightboard/badge/?version=latest)](https://insightboard.readthedocs.io/en/latest/?badge=latest)
-[![codecov](https://codecov.io/github/globaldothealth/autoparser/graph/badge.svg?token=Y1V6P2CA40)](https://codecov.io/github/globaldothealth/autoparser)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+**This repository has been archived, as autoparser is now available and being actively developed within ADTL**
 
 autoparser helps in the generation of ADTL parsers as
 TOML files, which can then be processed by

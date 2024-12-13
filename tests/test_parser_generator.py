@@ -1,4 +1,5 @@
 from pathlib import Path
+import autoparser
 from autoparser import ParserGenerator
 import pandas as pd
 import tomli
@@ -15,6 +16,17 @@ ANIMAL_PARSER = ParserGenerator(
 # TODO: sort out how lists and dicts are written out in the csv file to enable stuff to
 # actually be read in properly. Maybe try and utilise some kind of schema for the
 # dataframe?
+
+
+def test_invalid_converter():
+    with pytest.raises(NotImplementedError, match="Only ADTL is supported"):
+        ParserGenerator(
+            "tests/sources/animals_mapping.csv",
+            Path("tests/schemas"),
+            "animals",
+            config=Path("tests/test_config.toml"),
+            transformation_tool="invalid",
+        )
 
 
 def test_parsed_choices():
@@ -165,6 +177,23 @@ def test_create_parser(tmp_path, snapshot):
     file = tmp_path / "test.toml"
 
     parser.create_parser(file_name=file)
+
+    with file.open("rb") as fp:
+        parser_file = tomli.load(fp)
+
+    # check body of parser file
+    assert parser_file["animals"] == snapshot
+
+
+def test_create_parser_ap_access(tmp_path, snapshot):
+    file = tmp_path / "test.toml"
+
+    autoparser.create_parser(
+        "tests/sources/animals_mapping.csv",
+        "tests/schemas",
+        str(file),
+        config="tests/test_config.toml",
+    )
 
     with file.open("rb") as fp:
         parser_file = tomli.load(fp)

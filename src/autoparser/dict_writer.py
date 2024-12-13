@@ -11,7 +11,7 @@ import numpy as np
 
 from .openai_calls import _get_definitions as _get_definitions_openai
 from .gemini_calls import _get_definitions as _get_definitions_gemini
-from .util import read_data, load_data_dict
+from .util import read_config_schema, load_data_dict, read_data
 from .util import DEFAULT_CONFIG
 
 
@@ -38,7 +38,9 @@ class DictWriter:
     ):
         if isinstance(config, str):
             config = Path(config)
-        self.config = read_data(config or Path(Path(__file__).parent, DEFAULT_CONFIG))
+        self.config = read_config_schema(
+            config or Path(Path(__file__).parent, DEFAULT_CONFIG)
+        )
 
     def _setup_llm(self, key: str, name: str):
         """
@@ -54,13 +56,16 @@ class DictWriter:
         name
             Name of the LLM to use (currently only OpenAI and Gemini are supported)
         """
-        self.key = key
-        if name == "openai":
-            self.client = OpenAI(api_key=key)
+        if key is None:
+            raise ValueError("API key required for generating descriptions")
+        else:
+            self.key = key
 
+        if name == "openai":  # pragma: no cover
+            self.client = OpenAI(api_key=key)
             self._get_descriptions = _get_definitions_openai
 
-        elif name == "gemini":
+        elif name == "gemini":  # pragma: no cover
             gemini.configure(api_key=key)
             self.client = gemini.GenerativeModel("gemini-1.5-flash")
             self._get_descriptions = _get_definitions_gemini
@@ -88,20 +93,7 @@ class DictWriter:
             Data dictionary containing field names, field types, and common values.
         """
 
-        if isinstance(data, str):
-            data = Path(data)
-            if data.suffix == ".csv":
-                df = pd.read_csv(data)
-            elif data.suffix == ".xlsx":
-                df = pd.read_excel(data)
-            else:
-                raise ValueError(f"Unsupported format (not CSV or XLSX): {data}")
-        elif isinstance(data, pd.DataFrame):
-            df = data
-        else:
-            raise ValueError(
-                "Data must be a path to a CSV or XLSX file, or a DataFrame"
-            )
+        df = read_data(data, "Data")
 
         names = df.columns
         types = [str(t) for t in df.dtypes]

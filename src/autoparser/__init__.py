@@ -23,14 +23,15 @@ from autoparser.make_toml import main as make_toml_main
 def main():
     if len(sys.argv) < 2:
         print(
-            """autoparser: specify subcommand to run
+            """
+            autoparser: specify subcommand to run
 
-Available subcommands:
-  create-dict - Create a data dictionary from a dataset
-  add-descriptions - Add descriptions to a data dictionary (LLM key required)
-  create-mapping - Create initial CSV mapping from data dictionary (LLM key required)
-  create-parser - Generate TOML parser from CSV mapping file
-"""
+            Available subcommands:
+            create-dict - Create a data dictionary from a dataset
+            add-descriptions - Add descriptions to a data dictionary (LLM key required)
+            create-mapping - Create initial CSV mapping from data dictionary (LLM key required) # noqa
+            create-parser - Generate TOML parser from CSV mapping file
+            """
         )
         sys.exit(1)
     subcommand = sys.argv[1]

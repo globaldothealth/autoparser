@@ -14,7 +14,7 @@ import tomli
 DEFAULT_CONFIG = "config/autoparser.toml"
 
 
-def read_data(path: str | Path) -> Dict:
+def read_config_schema(path: str | Path) -> Dict:
     if isinstance(path, str):
         path = Path(path)
 
@@ -24,7 +24,9 @@ def read_data(path: str | Path) -> Dict:
         with path.open("rb") as fp:
             return tomli.load(fp)
     else:
-        raise ValueError(f"read_data(): Unsupported file format: {path.suffix}")
+        raise ValueError(
+            f"read_config_schema(): Unsupported file format: {path.suffix}"
+        )
 
 
 def read_json(file: str | Path) -> dict:
@@ -33,6 +35,25 @@ def read_json(file: str | Path) -> dict:
 
     with file.open() as fp:
         return json.load(fp)
+
+
+def read_data(file: str | Path | pd.DataFrame, file_type: str):
+    """Reads in data/mapping files, which expect csv, excel or dataframe formats"""
+
+    if isinstance(file, str):
+        file = Path(file)
+        if file.suffix == ".csv":
+            return pd.read_csv(file)
+        elif file.suffix == ".xlsx":
+            return pd.read_excel(file)
+        else:
+            raise ValueError(f"Unsupported format (not CSV or XLSX): {file}")
+    elif isinstance(file, pd.DataFrame):
+        return file
+    else:
+        raise ValueError(
+            f"{file_type} must be a path to a CSV or XLSX file, or a DataFrame"
+        )
 
 
 def parse_choices(config, s: str) -> Dict[str, Any]:
